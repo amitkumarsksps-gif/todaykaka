@@ -1,25 +1,39 @@
-// ===== STEP TRACK =====
+// ===== STEP TRACK (ONLY READ HERE) =====
 let step = parseInt(localStorage.getItem("step") || "0");
-step++;
-localStorage.setItem("step", step);
 
 // ===== VISITED TRACK =====
 let visited = JSON.parse(localStorage.getItem("visited") || "[]");
 
-// current page (clean path)
+// current page
 let current = window.location.pathname;
 
-// avoid duplicate entry
+// add current page to visited list
 if (!visited.includes(current)) {
   visited.push(current);
 }
 
 localStorage.setItem("visited", JSON.stringify(visited));
 
-// ===== SMART NEXT PAGE =====
+
+// ===== MAIN NEXT FUNCTION =====
 function goNext() {
 
-  // 👉 FINAL PAGE CONDITION (2 pages ke baad)
+  // 👉 STEP INCREASE ONLY ON CLICK
+  let step = parseInt(localStorage.getItem("step") || "0");
+  step++;
+  localStorage.setItem("step", step);
+
+  // refresh visited again safely
+  let visited = JSON.parse(localStorage.getItem("visited") || "[]");
+  let current = window.location.pathname;
+
+  if (!visited.includes(current)) {
+    visited.push(current);
+  }
+  localStorage.setItem("visited", JSON.stringify(visited));
+
+
+  // ===== FINAL PAGE CONDITION =====
   if (step >= 2) {
     localStorage.removeItem("step");
     localStorage.removeItem("visited");
@@ -28,7 +42,8 @@ function goNext() {
     return;
   }
 
-  // 👉 ALL PAGES LIST
+
+  // ===== ALL PAGES LIST =====
   let pages = [
     "/articles/instant-personal-loan-online-india.html",
     "/articles/best-credit-card-for-beginners-india.html",
@@ -52,21 +67,24 @@ function goNext() {
     "/articles/fast-cash-loan-without-documents.html"
   ];
 
-  // 👉 REMOVE CURRENT PAGE (extra safety)
+
+  // remove current page
   let filtered = pages.filter(p => p !== current);
 
-  // 👉 REMOVE VISITED PAGES
+  // remove visited pages
   let remaining = filtered.filter(p => !visited.includes(p));
 
-  // 👉 RESET IF ALL VISITED
+
+  // reset if all visited
   if (remaining.length === 0) {
     remaining = filtered;
     localStorage.setItem("visited", JSON.stringify([current]));
   }
 
-  // 👉 RANDOM SELECT
+
+  // random select
   let randomPage = remaining[Math.floor(Math.random() * remaining.length)];
 
-  // 👉 REDIRECT
+  // redirect
   window.location.href = randomPage;
 }
