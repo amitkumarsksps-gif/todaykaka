@@ -43,7 +43,9 @@ p {
   border-radius: 8px;
 }
 
-/* ===== TIMER UI ===== */
+/* =========================
+   TIMER FIX (IMPORTANT PART)
+========================= */
 
 .timer-container {
   position: relative;
@@ -52,20 +54,24 @@ p {
   margin: 20px auto;
 }
 
-/* rings */
+/* rings visible fix */
 .ring {
   position: absolute;
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
   border: 6px solid transparent;
-  display: none;
+  display: block;   /* FIX: was hidden earlier */
 }
 
+/* OUTER RING */
 .ring1 {
+  width: 150px;
+  height: 150px;
+  top: 0;
+  left: 0;
   border-top: 6px solid #ff3b3b;
 }
 
+/* MIDDLE RING */
 .ring2 {
   width: 120px;
   height: 120px;
@@ -74,6 +80,7 @@ p {
   border-top: 6px solid #007bff;
 }
 
+/* INNER RING */
 .ring3 {
   width: 90px;
   height: 90px;
@@ -106,15 +113,6 @@ p {
   cursor: pointer;
 }
 
-/* states */
-.waiting {
-  color: #007bff;
-}
-
-.done {
-  color: #28a745;
-}
-
 /* BUTTON */
 button {
   display: block;
@@ -130,7 +128,6 @@ button {
   transition: 0.3s;
 }
 
-/* active button */
 button.active {
   background: #007bff;
   cursor: pointer;
