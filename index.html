@@ -1,13 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Finance Guide Hub</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Finance Guide Hub – Latest Loan Articles</title>
+
 <link rel="stylesheet" href="assets/css/style.css">
 
 <style>
-ul{list-style:none;padding:0}
-li{margin:10px 0;padding:10px;background:#f5f5f5;border-radius:8px}
-a{text-decoration:none;color:#000;font-weight:bold}
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f7fb;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,#007bff,#00c6ff);
+  padding:15px;
+  text-align:center;
+  color:#fff;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+/* 3D CARD */
+.card{
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#000;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transform:translateY(0);
+  transition:0.3s;
+  perspective:1000px;
+}
+
+.card:hover{
+  transform:translateY(-8px) rotateX(5deg) rotateY(5deg);
+  box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+/* AD BOX */
+.ad-box{
+  background:#eee;
+  padding:20px;
+  text-align:center;
+  margin:25px 0;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+/* TITLE */
+h1{
+  text-align:center;
+  color:#007bff;
+}
 </style>
 
 </head>
@@ -15,88 +79,69 @@ a{text-decoration:none;color:#000;font-weight:bold}
 <body>
 
 <header>
-  <h2>Finance Guide Hub</h2>
+Finance Guide Hub
 </header>
 
 <div class="container">
-  <h1>All Articles</h1>
 
-  <ul id="postList"></ul>
+<h1>Latest Finance & Loan Articles</h1>
 
-  <div class="ad-box">Ad Space</div>
+<!-- AD 1 -->
+<div class="ad-box">Ad Space</div>
 
-  <div id="timer">Please wait...</div>
-  <button id="btn" disabled onclick="goNext()">Continue</button>
+<div class="grid" id="postList"></div>
+
+<!-- AD 2 -->
+<div class="ad-box">Ad Space</div>
+
+<!-- AD 3 -->
+<div class="ad-box">Ad Space</div>
 
 </div>
 
 <script>
 
-// 🔥 ALL POSTS AUTO LIST (based on your folder)
+// ALL POSTS (FIXED LINKS)
 const posts = [
-"best-credit-card-for-beginners-india.html",
-"best-fast-cash-loan-apps-2026.html",
-"best-loan-apps-india-instant-cash.html",
-"business-loan-without-collateral-india.html",
-"business-loan-without-collateral.html",
-"car-loan-zero-down-payment-india.html",
-"emergency-loan-online-instant-approval.html",
-"fast-cash-loan-without-documents.html",
-"gold-loan-interest-rate-today-india.html",
-"gold-loan-interest-rates-today.html",
-"guaranteed-approval-loans-bad-credit-truth.html",
-"home-loan-with-low-interest-rates-2026.html",
-"improve-credit-score-fast-india.html",
-"instant-approval-credit-cards-india.html",
-"instant-business-loan-without-collateral.html",
-"instant-personal-loan-online-india.html",
-"latest-home-loan-interest-rates-india-2026.html",
-"loan-against-salary-instant-approval.html",
-"loan-without-cibil-score.html",
-"low-interest-personal-loan-online-india.html",
-"low-interest-personal-loan-online.html",
-"online-loan-for-unemployed-india.html",
-"online-loan-for-unemployed.html",
-"personal-loan-emi-calculator-guide.html",
-"personal-loan-emi-calculator.html",
-"same-day-payday-loan-online.html",
-"student-loan-without-guarantor-india.html"
+"/articles/instant-personal-loan-online-india.html",
+"/articles/best-credit-card-for-beginners-india.html",
+"/articles/home-loan-with-low-interest-rates-2026.html",
+"/articles/instant-business-loan-without-collateral.html",
+"/articles/improve-credit-score-fast-india.html",
+"/articles/emergency-loan-online-instant-approval.html",
+"/articles/same-day-payday-loan-online.html",
+"/articles/business-loan-without-collateral-india.html",
+"/articles/student-loan-without-guarantor-india.html",
+"/articles/best-loan-apps-india-instant-cash.html",
+"/articles/guaranteed-approval-loans-bad-credit-truth.html",
+"/articles/latest-home-loan-interest-rates-india-2026.html",
+"/articles/car-loan-zero-down-payment-india.html",
+"/articles/instant-approval-credit-cards-india.html",
+"/articles/loan-against-salary-instant-approval.html",
+"/articles/personal-loan-emi-calculator-guide.html",
+"/articles/online-loan-for-unemployed-india.html",
+"/articles/gold-loan-interest-rate-today-india.html",
+"/articles/low-interest-personal-loan-online-india.html",
+"/articles/fast-cash-loan-without-documents.html"
 ];
 
-// 🔥 Render posts
+// RENDER CARDS
 let list = document.getElementById("postList");
 
-posts.forEach(post => {
-  let li = document.createElement("li");
+posts.forEach(link => {
+
+  let title = link
+    .replace("/articles/","")
+    .replace(".html","")
+    .replace(/-/g," ");
+
   let a = document.createElement("a");
+  a.href = link;
+  a.className = "card";
+  a.innerText = title;
 
-  a.href = "articles/" + post;
-  a.innerText = post.replace(".html","").replace(/-/g," ");
-
-  li.appendChild(a);
-  list.appendChild(li);
+  list.appendChild(a);
 });
-
-// ⏳ Timer
-let t = 5;
-let timer = document.getElementById("timer");
-let btn = document.getElementById("btn");
-
-let x = setInterval(function(){
-  timer.innerHTML = "Wait " + t + " sec";
-  t--;
-
-  if(t < 0){
-    clearInterval(x);
-    timer.innerHTML = "Go ahead";
-    btn.disabled = false;
-  }
-},1000);
-
-// 🔁 Redirect
-function goNext(){
-  window.location.href = "final.html";
-}
 
 </script>
 
