@@ -43,7 +43,7 @@ p {
   border-radius: 8px;
 }
 
-/* ===== ROUND TIMER UI ===== */
+/* ===== TIMER UI ===== */
 
 .timer-container {
   position: relative;
@@ -52,6 +52,7 @@ p {
   margin: 20px auto;
 }
 
+/* rings */
 .ring {
   position: absolute;
   width: 100%;
@@ -61,7 +62,6 @@ p {
   display: none;
 }
 
-/* 3 rings */
 .ring1 {
   border-top: 6px solid #ff3b3b;
 }
@@ -137,7 +137,6 @@ button.active {
   animation: pulse 1s infinite;
 }
 
-/* pulse animation */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
