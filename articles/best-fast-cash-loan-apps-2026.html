@@ -18,29 +18,6 @@
 .scroll-text{text-align:center;color:green;font-weight:bold;margin:20px 0;}
 </style>
 
-<!-- SCHEMA -->
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "Article",
-"headline": "Best Fast Cash Loan Apps for Instant Money in 2026 – Top Picks",
-"description": "Explore top fast cash loan apps in 2026 with instant approval, eligibility criteria, and safety tips.",
-"author": {
-"@type": "Person",
-"name": "Finance Expert"
-},
-"publisher": {
-"@type": "Organization",
-"name": "Finance Guide Hub"
-},
-"datePublished": "2026-04-12",
-"mainEntityOfPage": {
-"@type": "WebPage",
-"@id": "https://todaykaka.com/best-loan-apps-india-instant-cash"
-}
-}
-</script>
-
 </head>
 
 <body>
@@ -55,39 +32,22 @@
 
 <p>In 2026, getting money instantly is easier than ever. With digital platforms, you can now use a <b>fast cash loan app</b> to receive funds within minutes directly in your bank account.</p>
 
-// TOP TIMER (FIXED ROUND TIMER)
-let topDone = false;
+<!-- TOP TIMER -->
+<div style="text-align:center;">
 
-function startTopTimer(){
+<div class="timer-container">
+  <div class="ring ring1" id="r1"></div>
+  <div class="ring ring2" id="r2"></div>
+  <div class="ring ring3" id="r3"></div>
 
-let text = document.getElementById("topText");
+  <div class="timer-text" id="topText" onclick="startTopTimer()">
+    Click here to generate link
+  </div>
+</div>
 
-// show rings
-document.getElementById("r1").style.display = "block";
-document.getElementById("r2").style.display = "block";
-document.getElementById("r3").style.display = "block";
+<button class="generate-btn" onclick="startTopTimer()">Generate Link</button>
 
-// start animation
-document.getElementById("r1").style.animation = "spin 10s linear forwards";
-document.getElementById("r2").style.animation = "spinReverse 10s linear forwards";
-document.getElementById("r3").style.animation = "spin 10s linear forwards";
-
-// change text
-text.innerText = "Please Wait...";
-text.classList.add("waiting");
-
-setTimeout(()=>{
-  text.innerText = "⬇️ Unlock your secure link below ⬇️";
-  text.classList.remove("waiting");
-  text.classList.add("done");
-
-  topDone = true;
-  refreshAd();
-  document.getElementById("scrollText").classList.remove("hidden");
-
-},10000);
-
-}
+</div>
 
 <!-- AD -->
 <div class="ad-box">Ad Space</div>
@@ -163,8 +123,19 @@ setTimeout(()=>{
 
 <!-- BOTTOM -->
 <div id="bottomSection" class="hidden">
-<div id="bottomTimer" class="timer">Click continue to proceed</div>
+
+<div class="timer-container">
+  <div class="ring ring1" id="br1"></div>
+  <div class="ring ring2" id="br2"></div>
+  <div class="ring ring3" id="br3"></div>
+
+  <div class="timer-text" id="bottomText">
+    Click continue to proceed
+  </div>
+</div>
+
 <button id="continueBtn" onclick="startBottomTimer()" disabled>Wait...</button>
+
 </div>
 
 </div>
@@ -184,81 +155,130 @@ setTimeout(()=>{ad.innerHTML="Ad Space";},1000);
 });
 }
 
-// TOP TIMER
+// TOP TIMER FIX
 let topDone=false;
 
 function startTopTimer(){
-let t=10;
-let timer=document.getElementById("topTimer");
 
-let interval=setInterval(()=>{
-timer.innerText="Generating link... "+t+"s";
-t--;
+let text=document.getElementById("topText");
 
-if(t<0){
-clearInterval(interval);
-timer.innerText="⬇️ Unlock your secure link below ⬇️";
+document.getElementById("r1").style.display="block";
+document.getElementById("r2").style.display="block";
+document.getElementById("r3").style.display="block";
+
+document.getElementById("r1").style.animation="spin 10s linear forwards";
+document.getElementById("r2").style.animation="spinReverse 10s linear forwards";
+document.getElementById("r3").style.animation="spin 10s linear forwards";
+
+text.innerText="Please Wait...";
+
+setTimeout(()=>{
+text.innerText="⬇️ Unlock your secure link below ⬇️";
 topDone=true;
 refreshAd();
 document.getElementById("scrollText").classList.remove("hidden");
-}
-},1000);
+},10000);
+
 }
 
-// SCROLL
+// SCROLL UNLOCK
 window.addEventListener("scroll",function(){
-if(topDone){
+if(!topDone) return;
+
 let scrollPos=window.scrollY+window.innerHeight;
 let pageHeight=document.body.offsetHeight;
 
 if(scrollPos>pageHeight-100){
-let bottom=document.getElementById("bottomSection");
-bottom.classList.remove("hidden");
-
+document.getElementById("bottomSection").classList.remove("hidden");
 let btn=document.getElementById("continueBtn");
 btn.disabled=false;
 btn.innerText="Continue";
 }
-}
 });
 
-// BOTTOM TIMER
-<!-- BOTTOM -->
-<div id="bottomSection" class="hidden" style="text-align:center;">
+// BOTTOM TIMER FIX
+function startBottomTimer(){
 
-<div class="timer-container">
-  <div class="ring ring1" id="br1"></div>
-  <div class="ring ring2" id="br2"></div>
-  <div class="ring ring3" id="br3"></div>
+let text=document.getElementById("bottomText");
+let btn=document.getElementById("continueBtn");
 
-  <div class="timer-text" id="bottomText">
-    Click continue to proceed
-  </div>
-</div>
+btn.disabled=true;
 
-<button id="continueBtn" onclick="startBottomTimer()" disabled>
-Wait...
-</button>
+document.getElementById("br1").style.display="block";
+document.getElementById("br2").style.display="block";
+document.getElementById("br3").style.display="block";
 
-</div>
-// REDIRECT
+document.getElementById("br1").style.animation="spin 10s linear forwards";
+document.getElementById("br2").style.animation="spinReverse 10s linear forwards";
+document.getElementById("br3").style.animation="spin 10s linear forwards";
+
+text.innerText="Please Wait...";
+
+setTimeout(()=>{
+text.innerText="Click to Continue";
+btn.disabled=false;
+btn.innerText="Continue";
+btn.onclick=goNext;
+},10000);
+
+}
+
+// REDIRECT SYSTEM (SAME)
+let step=parseInt(localStorage.getItem("step")||"0");
+let visited=JSON.parse(localStorage.getItem("visited")||"[]");
+let current=window.location.pathname;
+
+if(!visited.includes(current)){
+visited.push(current);
+localStorage.setItem("visited",JSON.stringify(visited));
+}
+
 function goNext(){
-let links=[
-"https://todaykaka.com/best-loan-apps-india-instant-cash",
-"https://todaykaka.com/guaranteed-approval-loans-bad-credit-truth",
-"https://todaykaka.com/latest-home-loan-interest-rates-india-2026",
-"https://todaykaka.com/car-loan-zero-down-payment-india",
-"https://todaykaka.com/instant-approval-credit-cards-india",
-"https://todaykaka.com/loan-against-salary-instant-approval",
-"https://todaykaka.com/personal-loan-emi-calculator-guide",
-"https://todaykaka.com/online-loan-for-unemployed-india",
-"https://todaykaka.com/gold-loan-interest-rate-today-india",
-"https://todaykaka.com/low-interest-personal-loan-online-india",
-"https://todaykaka.com/fast-cash-loan-without-documents"
+
+step++;
+localStorage.setItem("step",step);
+
+if(step>=2){
+localStorage.removeItem("step");
+localStorage.removeItem("visited");
+window.location.href="/final.html";
+return;
+}
+
+let pages=[
+"/articles/instant-personal-loan-online-india.html",
+"/articles/best-credit-card-for-beginners-india.html",
+"/articles/home-loan-with-low-interest-rates-2026.html",
+"/articles/instant-business-loan-without-collateral.html",
+"/articles/improve-credit-score-fast-india.html",
+"/articles/emergency-loan-online-instant-approval.html",
+"/articles/same-day-payday-loan-online.html",
+"/articles/business-loan-without-collateral-india.html",
+"/articles/student-loan-without-guarantor-india.html",
+"/articles/best-loan-apps-india-instant-cash.html",
+"/articles/guaranteed-approval-loans-bad-credit-truth.html",
+"/articles/latest-home-loan-interest-rates-india-2026.html",
+"/articles/car-loan-zero-down-payment-india.html",
+"/articles/instant-approval-credit-cards-india.html",
+"/articles/loan-against-salary-instant-approval.html",
+"/articles/personal-loan-emi-calculator-guide.html",
+"/articles/online-loan-for-unemployed-india.html",
+"/articles/gold-loan-interest-rate-today-india.html",
+"/articles/low-interest-personal-loan-online-india.html",
+"/articles/fast-cash-loan-without-documents.html"
 ];
 
-let random=links[Math.floor(Math.random()*links.length)];
+let filtered=pages.filter(p=>p!==current);
+let remaining=filtered.filter(p=>!visited.includes(p));
+
+if(remaining.length===0){
+remaining=filtered;
+localStorage.setItem("visited",JSON.stringify([current]));
+}
+
+let random=remaining[Math.floor(Math.random()*remaining.length)];
 window.location.href=random;
+
 }
 
 </script>
