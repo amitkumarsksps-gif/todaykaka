@@ -1,27 +1,34 @@
-// STEP TRACK
-let step = localStorage.getItem("step") || 0;
+// ===== STEP TRACK =====
+let step = parseInt(localStorage.getItem("step") || "0");
 step++;
 localStorage.setItem("step", step);
 
-// VISITED TRACK
+// ===== VISITED TRACK =====
 let visited = JSON.parse(localStorage.getItem("visited") || "[]");
+
+// current page (clean path)
 let current = window.location.pathname;
 
-if(!visited.includes(current)){
+// avoid duplicate entry
+if (!visited.includes(current)) {
   visited.push(current);
 }
+
 localStorage.setItem("visited", JSON.stringify(visited));
 
-// NEXT PAGE
-function goNext(){
+// ===== SMART NEXT PAGE =====
+function goNext() {
 
-  if(step >= 2){
+  // 👉 FINAL PAGE CONDITION (2 pages ke baad)
+  if (step >= 2) {
     localStorage.removeItem("step");
     localStorage.removeItem("visited");
+
     window.location.href = "/final.html";
     return;
   }
 
+  // 👉 ALL PAGES LIST
   let pages = [
     "/articles/instant-personal-loan-online-india.html",
     "/articles/best-credit-card-for-beginners-india.html",
@@ -45,13 +52,21 @@ function goNext(){
     "/articles/fast-cash-loan-without-documents.html"
   ];
 
-  // FILTER visited
-  let remaining = pages.filter(p => !visited.includes(p));
+  // 👉 REMOVE CURRENT PAGE (extra safety)
+  let filtered = pages.filter(p => p !== current);
 
-  if(remaining.length === 0){
-    remaining = pages; // reset if all visited
+  // 👉 REMOVE VISITED PAGES
+  let remaining = filtered.filter(p => !visited.includes(p));
+
+  // 👉 RESET IF ALL VISITED
+  if (remaining.length === 0) {
+    remaining = filtered;
+    localStorage.setItem("visited", JSON.stringify([current]));
   }
 
-  let random = remaining[Math.floor(Math.random() * remaining.length)];
-  window.location.href = random;
+  // 👉 RANDOM SELECT
+  let randomPage = remaining[Math.floor(Math.random() * remaining.length)];
+
+  // 👉 REDIRECT
+  window.location.href = randomPage;
 }

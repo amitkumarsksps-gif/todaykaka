@@ -4,6 +4,7 @@ body {
   background: #f4f7fb;
 }
 
+/* HEADER */
 header {
   background: linear-gradient(90deg,#007bff,#00c6ff);
   padding: 15px;
@@ -17,6 +18,7 @@ header a {
   font-weight: bold;
 }
 
+/* CONTAINER */
 .container {
   max-width: 800px;
   margin: auto;
@@ -24,15 +26,15 @@ header a {
   padding: 20px;
 }
 
-h1 {
-  color: #007bff;
-}
+/* TEXT */
+h1 { color: #007bff; }
 
 p {
   line-height: 1.7;
   color: #333;
 }
 
+/* AD BOX */
 .ad-box {
   background: #eee;
   padding: 15px;
@@ -41,13 +43,78 @@ p {
   border-radius: 8px;
 }
 
-.timer {
-  text-align: center;
-  font-weight: bold;
-  margin: 20px 0;
-  color: red;
+/* ===== ROUND TIMER UI ===== */
+
+.timer-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 20px auto;
 }
 
+.ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  display: none;
+}
+
+/* 3 rings */
+.ring1 {
+  border-top: 6px solid #ff3b3b;
+}
+
+.ring2 {
+  width: 120px;
+  height: 120px;
+  top: 15px;
+  left: 15px;
+  border-top: 6px solid #007bff;
+}
+
+.ring3 {
+  width: 90px;
+  height: 90px;
+  top: 30px;
+  left: 30px;
+  border-top: 6px solid #ffa500;
+}
+
+/* animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* center text */
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+}
+
+/* states */
+.waiting {
+  color: #007bff;
+}
+
+.done {
+  color: #28a745;
+}
+
+/* BUTTON */
 button {
   display: block;
   width: 100%;
@@ -58,27 +125,36 @@ button {
   font-size: 18px;
   border-radius: 6px;
   cursor: not-allowed;
+  margin-top: 10px;
 }
 
+/* active button */
 button.active {
   background: #007bff;
   cursor: pointer;
+  animation: pulse 1s infinite;
 }
 
+/* pulse animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* SCROLL TEXT */
+.scroll-text {
+  text-align: center;
+  color: green;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   padding: 15px;
   background: #222;
   color: #fff;
   margin-top: 20px;
-}
-
-button.active {
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.05);}
-  100% {transform: scale(1);}
 }
