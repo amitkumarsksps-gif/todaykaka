@@ -103,6 +103,7 @@ p {
   font-weight: bold;
   text-align: center;
   color: #000;
+  cursor: pointer;
 }
 
 /* states */
@@ -126,6 +127,7 @@ button {
   border-radius: 6px;
   cursor: not-allowed;
   margin-top: 10px;
+  transition: 0.3s;
 }
 
 /* active button */
