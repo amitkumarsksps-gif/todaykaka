@@ -44,52 +44,52 @@ p {
 }
 
 /* =========================
-   TIMER FIX (IMPORTANT PART)
+   TIMER (CLEAN FIXED VERSION)
 ========================= */
 
 .timer-container {
   position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 20px auto;
+  width: 160px;
+  height: 160px;
+  margin: 30px auto;
 }
 
-/* rings visible fix */
+/* ALL RINGS BASE */
 .ring {
   position: absolute;
   border-radius: 50%;
   border: 6px solid transparent;
-  display: block;   /* FIX: was hidden earlier */
+  display: block;
 }
 
-/* OUTER RING */
+/* OUTER */
 .ring1 {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   top: 0;
   left: 0;
   border-top: 6px solid #ff3b3b;
 }
 
-/* MIDDLE RING */
+/* MIDDLE */
 .ring2 {
   width: 120px;
   height: 120px;
-  top: 15px;
-  left: 15px;
+  top: 20px;
+  left: 20px;
   border-top: 6px solid #007bff;
 }
 
-/* INNER RING */
+/* INNER */
 .ring3 {
-  width: 90px;
-  height: 90px;
-  top: 30px;
-  left: 30px;
+  width: 80px;
+  height: 80px;
+  top: 40px;
+  left: 40px;
   border-top: 6px solid #ffa500;
 }
 
-/* animations */
+/* ANIMATION */
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -100,7 +100,7 @@ p {
   to { transform: rotate(-360deg); }
 }
 
-/* center text */
+/* CENTER TEXT */
 .timer-text {
   position: absolute;
   top: 50%;
@@ -110,12 +110,10 @@ p {
   font-weight: bold;
   text-align: center;
   color: #000;
-  cursor: pointer;
 }
 
 /* BUTTON */
 button {
-  display: block;
   width: 100%;
   padding: 12px;
   background: #28a745;
@@ -123,21 +121,13 @@ button {
   border: none;
   font-size: 18px;
   border-radius: 6px;
-  cursor: not-allowed;
   margin-top: 10px;
-  transition: 0.3s;
+  cursor: not-allowed;
 }
 
 button.active {
   background: #007bff;
   cursor: pointer;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
 }
 
 /* SCROLL TEXT */
