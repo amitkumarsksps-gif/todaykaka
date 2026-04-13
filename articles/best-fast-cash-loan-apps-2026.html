@@ -55,22 +55,39 @@
 
 <p>In 2026, getting money instantly is easier than ever. With digital platforms, you can now use a <b>fast cash loan app</b> to receive funds within minutes directly in your bank account.</p>
 
-<!-- TOP TIMER -->
-<div id="topSection" style="text-align:center;">
+// TOP TIMER (FIXED ROUND TIMER)
+let topDone = false;
 
-<div class="timer-container">
-  <div class="ring ring1" id="r1"></div>
-  <div class="ring ring2" id="r2"></div>
-  <div class="ring ring3" id="r3"></div>
+function startTopTimer(){
 
-  <div class="timer-text" id="topText">
-    Click here to generate link
-  </div>
-</div>
+let text = document.getElementById("topText");
 
-<button class="generate-btn" onclick="startTopTimer()">Generate Link</button>
+// show rings
+document.getElementById("r1").style.display = "block";
+document.getElementById("r2").style.display = "block";
+document.getElementById("r3").style.display = "block";
 
-</div>
+// start animation
+document.getElementById("r1").style.animation = "spin 10s linear forwards";
+document.getElementById("r2").style.animation = "spinReverse 10s linear forwards";
+document.getElementById("r3").style.animation = "spin 10s linear forwards";
+
+// change text
+text.innerText = "Please Wait...";
+text.classList.add("waiting");
+
+setTimeout(()=>{
+  text.innerText = "⬇️ Unlock your secure link below ⬇️";
+  text.classList.remove("waiting");
+  text.classList.add("done");
+
+  topDone = true;
+  refreshAd();
+  document.getElementById("scrollText").classList.remove("hidden");
+
+},10000);
+
+}
 
 <!-- AD -->
 <div class="ad-box">Ad Space</div>
